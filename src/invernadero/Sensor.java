@@ -34,7 +34,7 @@ public abstract class Sensor implements Runnable {
     // Lo que hace el hilo
     @Override
     public void run() {
-        // Preguntamos qué hilo está ejecutando esto (como en el Cocinero)
+        // Preguntamos qué hilo está ejecutando esto
         String hilo = Thread.currentThread().getName();
 
         for (int i = 1; i <= numLecturas; i++) {
@@ -57,7 +57,7 @@ public abstract class Sensor implements Runnable {
             }
 
             // Prepara la línea del log
-            String linea = java.time.LocalTime.now() + " [" + hilo + "] " + nombre + ": " + valor + " " + unidad;
+            String linea = java.time.LocalTime.now() + " (" + hilo + ") " + nombre + ": " + valor + " " + unidad;
 
             // Si está fuera del rango sale una alerta
             if (valor < minimo || valor > maximo) {
@@ -72,7 +72,7 @@ public abstract class Sensor implements Runnable {
         }
     }
 
-    // Resumen de la libreta en una línea
+    // Resumen del informe
     public String informe() {
         // Si todavía no ha medido nada
         if (lecturas == 0) {
